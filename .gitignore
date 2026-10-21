@@ -67,6 +67,17 @@ vcpkg_installed/
 Testing/
 .cache/
 
+# visual studio
+.vs/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.suo
+Debug/
+Release/
+x64/
+
 # ignore
 .ignore
 ignore/
