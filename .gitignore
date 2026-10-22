@@ -73,6 +73,7 @@ Testing/
 *.vcxproj
 *.vcxproj.filters
 *.vcxproj.user
+*.DotSettings.user
 *.suo
 Debug/
 Release/
