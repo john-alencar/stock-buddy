@@ -7,7 +7,7 @@ namespace stockbuddy {
 	/// Stores a dynamically allocated history of prices.	
 	class PriceHistory {
 		double* m_pArr{};
-		size_t m_ArrSize{};
+		size_t m_arrSize{};
 	public:
 		PriceHistory(size_t size);
 		~PriceHistory();

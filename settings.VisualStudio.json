@@ -1,0 +1,9 @@
+/* Visual Studio Settings File */
+{
+  "environment.terminal.profiles+defaultItemIndex": 0,
+  "languages.cpp.codeStyle.formatting.newLine.newlineKeywordCatch": true,
+  "languages.cpp.codeStyle.formatting.newLine.closeBraceSameLineEmptyType": true,
+  "languages.cpp.codeStyle.formatting.newLine.closeBraceSameLineEmptyFunction": true,
+  "languages.cpp.codeStyle.formatting.newLine.newlineScopeBrace": true,
+  "languages.cpp.codeStyle.formatting.newLine.newlineKeywordWhile": true
+}
