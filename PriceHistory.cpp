@@ -30,8 +30,9 @@ namespace stockbuddy {
 	PriceHistory& PriceHistory::operator=(const PriceHistory& other) {
 		if (this != &other) {
 			delete[] m_pArr;
+			m_pArr = nullptr;
+			m_arrSize = other.m_arrSize;
 			if (other.m_pArr != nullptr) {
-				m_arrSize = other.m_arrSize;
 				m_pArr = new double[m_arrSize];
 				for (size_t i = 0; i < m_arrSize; ++i) {
 					m_pArr[i] = other.m_pArr[i];
@@ -44,6 +45,7 @@ namespace stockbuddy {
 	PriceHistory& PriceHistory::operator=(PriceHistory&& other) noexcept {
 		if (this != &other) {
 			delete[] m_pArr;
+			m_pArr = nullptr;
 			m_arrSize = other.m_arrSize;
 			m_pArr = other.m_pArr;
 			other.m_pArr = {};
@@ -68,13 +70,13 @@ namespace stockbuddy {
 	}
 
 	double PriceHistory::sum() const {
+		double sum{};
 		if (m_pArr != nullptr) {
-			double sum{};
 			for (size_t i=0; i<m_arrSize; ++i) {
 				sum += m_pArr[i];
 			}
-			return sum;
 		}
+		return sum;
 	}
 	size_t PriceHistory::size() const {
 		return m_arrSize;
