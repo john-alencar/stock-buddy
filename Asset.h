@@ -25,9 +25,9 @@ namespace stockbuddy {
 		virtual double peg() const = 0;
 		virtual Zone zone() const = 0;
 		///Returns address of a dynamically created copy of the current instance
-		virtual Asset* clone() const = 0;
+		virtual Asset* clone() const;
 		///Inserts into `ostream` param a description of the current instance
-		virtual void display(std::ostream& os) const = 0;
+		virtual void display(std::ostream& os) const;
 	};
 	class Stock: public Asset {
 		int m_qty{};
