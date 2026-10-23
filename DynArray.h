@@ -1,5 +1,5 @@
-#ifndef DYNARRAY_H
-#define DYNARRAY_H
+#ifndef STOCKBUDDY_DYNARRAY_H
+#define STOCKBUDDY_DYNARRAY_H
 
 #include <cstddef>
 #include <iostream>
