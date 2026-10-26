@@ -19,15 +19,15 @@ namespace stockbuddy {
 		virtual ~Asset() = default;
 		const std::string& ticker() const;
 		const std::string& name() const;
-		///Returns total value of the holding
+		///Returns total value of the holding (shares * price)
 		virtual double value() const = 0;
 		///Returns `PEG` or `-1` if N/A
 		virtual double peg() const = 0;
 		virtual Zone zone() const = 0;
 		///Returns address of a dynamically created copy of the current instance
-		virtual Asset* clone() const;
+		virtual Asset* clone() const = 0;
 		///Inserts into `ostream` param a description of the current instance
-		virtual void display(std::ostream& os) const;
+		virtual void display(std::ostream& os) const = 0;
 	};
 	class Stock: public Asset {
 		int m_qty{};
@@ -45,7 +45,9 @@ namespace stockbuddy {
 		Asset* clone() const override;
 		void display(std::ostream& os) const override;
 		void addPrice(double price);
+		///Returns num. of past prices stored
 		int historyCount() const;
+		///Insert into the stream all prices separated by space
 		void displayHistory(std::ostream& os) const;
 	};
 	class DividendStock: public Stock {

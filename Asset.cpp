@@ -1,4 +1,6 @@
+#include <format>
 #include "Asset.h"
+
 
 namespace stockbuddy {
 	Asset::Asset(const char* ticker, const char* name)
@@ -16,7 +18,7 @@ namespace stockbuddy {
 	Stock::Stock(const char* ticker, const char* name, int qty, double price, double trailingPE,
 		double earningGrowthPercent, double cheapPE)
 		:Asset(ticker, name), m_qty{ qty }, m_price{ price }, m_trailingPE{ trailingPE }, m_earningGrowthPercent{ earningGrowthPercent }, m_cheapPE{ cheapPE } {
-	};
+	}
 
 	double Stock::value() const {
 		return m_price * m_qty;
@@ -44,22 +46,35 @@ namespace stockbuddy {
 	}
 
 	void Stock::display(std::ostream& os) const {
+		std::string pegText = [this]() {
+			if (peg() > 0) { return std::format("{:.2f}", peg()); }
+			else { return std::format("n/a"); }
+			}();
+		os << std::format ("{} ({}) shares: {} @ ${:.2f} value: {:.2f} P/E: {:.2f} PEG: {} zone: {}", ticker(), name(), m_qty, m_price, value(), m_trailingPE, pegText, toString(zone()));
 	}
 
 	void Stock::addPrice(double price) {
+		m_priceHistory[m_sizePriceHistory++] = price;
 	}
 
 	int Stock::historyCount() const {
+		return m_sizePriceHistory;
 	}
 
 	void Stock::displayHistory(std::ostream& os) const {
+		for (int i = 0; i<m_sizePriceHistory; ++i) {
+			if (i > 0) os << ' ';
+			os << m_priceHistory[i];
+		}
 	}
 
 	DividendStock::DividendStock(const char* ticker, const char* name, int qty, double price, double trailingPE,
-		double earningGrowthPercent, double cheapPE, double yield) {
+		double earningGrowthPercent, double cheapPE, double yield)
+			: Stock (ticker, name, qty, price, trailingPE, earningGrowthPercent, cheapPE), m_yield{ yield } {
 	}
 
 	double DividendStock::dividendIncome() const {
+		return value() * m_yield;
 	}
 
 	Asset* DividendStock::clone() const {
@@ -68,6 +83,7 @@ namespace stockbuddy {
 
 	void DividendStock::display(std::ostream& os) const {
 		Stock::display(os);
+		os << std::format(" yield: {:.2f}% income/yr: ${:.2f}", m_yield * 100, dividendIncome());
 	}
 
 	Etf::Etf(const char* ticker, const char* name, int qty, double price, double MER) {
