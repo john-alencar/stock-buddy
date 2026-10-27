@@ -50,7 +50,7 @@ namespace stockbuddy {
 			if (peg() > 0) { return std::format("{:.2f}", peg()); }
 			else { return std::format("n/a"); }
 			}();
-		os << std::format ("{} ({}) shares: {} @ ${:.2f} value: {:.2f} P/E: {:.2f} PEG: {} zone: {}", ticker(), name(), m_qty, m_price, value(), m_trailingPE, pegText, toString(zone()));
+		os << std::format ("{} ({}) shares: {} @ ${:.2f} value: ${:.2f} P/E: {:.2f} PEG: {} zone: {}", ticker(), name(), m_qty, m_price, value(), m_trailingPE, pegText, toString(zone()));
 	}
 
 	void Stock::addPrice(double price) {
