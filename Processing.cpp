@@ -18,10 +18,4 @@ namespace stockbuddy {
 	bool isGrowthBargain(const Asset* asset) {
 		return (asset && asset->zone() != Zone::Cheap && asset->peg() > 0 && asset->peg() <= 1);
 	}
-
-	template <typename T>
-	void sortItems(T** items, size_t count, bool(* before)(const T*, const T*)) {
-		
-	
-	}
 }

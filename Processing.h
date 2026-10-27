@@ -14,7 +14,19 @@ namespace stockbuddy {
 	bool isGrowthBargain(const Asset* asset); 
 	///receives the address of an array, the number of elements in it, and a pointer to a comparison function that receives two elements and returns true if the first one should be placed before the second one.
 	template <typename T>
-	void sortItems(T** items, size_t count, bool (*before)(const T*, const T*));
+	void sortItems(T** items, size_t count, bool (*before)(const T*, const T*)) {
+		for (size_t i = 0; i +1 <count; ++i) {
+			size_t idxWinner{i};
+			for (size_t j = i + 1; j<count; ++j) {
+				if (before(items[j], items[idxWinner])) {
+					idxWinner = j;
+				}	
+			}
+			T* temp = items[i];
+			items[i] = items[idxWinner];
+			items[idxWinner] = temp;
+		} 
+	}
 }
 
 
