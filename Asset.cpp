@@ -35,9 +35,9 @@ namespace stockbuddy {
 		if (m_trailingPE <= m_cheapPE) {
 			return Zone::Cheap;
 		}
-		else if (m_trailingPE <= m_cheapPE * 1.25) {
+		if (m_trailingPE <= m_cheapPE * 1.25) {
 			return Zone::Fair;
-		} 
+		}
 		return Zone::Rich;
 	}
 
@@ -86,16 +86,26 @@ namespace stockbuddy {
 		os << std::format(" yield: {:.2f}% income/yr: ${:.2f}", m_yield * 100, dividendIncome());
 	}
 
-	Etf::Etf(const char* ticker, const char* name, int qty, double price, double MER) {
+	Etf::Etf(const char* ticker, const char* name, int qty, double price, double trailingPE, double cheapPE, double MER)
+		:Asset(ticker, name), m_qty{ qty }, m_price{ price }, m_trailingPE{ trailingPE }, m_cheapPE{cheapPE}, m_MER(MER) {
 	}
 
 	double Etf::value() const {
+		return m_qty * m_price;
 	}
 
-	double Etf::peg() const {
+	double Etf::peg() const { 
+		return -1; //No PEG for etf
 	}
 
 	Zone Etf::zone() const {
+		if (m_trailingPE <= m_cheapPE) {
+			return Zone::Cheap;
+		}
+		if (m_trailingPE <= m_cheapPE * 1.25) {
+			return Zone::Fair;
+		}			
+		return Zone::Rich;
 	}
 
 	Asset* Etf::clone() const {
@@ -103,6 +113,8 @@ namespace stockbuddy {
 	}
 
 	void Etf::display(std::ostream& os) const {
+		
+		os << std::format("{} ({}) units: {} @ ${:.2f} value: ${:.2f} MER: {:.2f}% P/E: {:.2f} zone: {}", ticker(), name(), m_qty, m_price, value(), m_MER, m_trailingPE, toString(zone()));
 	}
 
 	const char* toString(Zone zone) {

@@ -61,9 +61,11 @@ namespace stockbuddy {
 	class Etf: public Asset {
 		int m_qty{};
 		double m_price{};
+		double m_trailingPE{};
+		double m_cheapPE{};
 		double m_MER{}; //percent
 	public:
-		Etf(const char* ticker, const char* name, int qty, double price, double MER);
+		Etf(const char* ticker, const char* name, int qty, double price, double trailingPE, double cheapPE, double MER);
 		double value() const override;
 		double peg() const override;
 		Zone zone() const override;
