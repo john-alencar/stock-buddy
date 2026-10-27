@@ -1,6 +1,6 @@
 # StockBuddy
 
-A C++17 console app that tracks a stock portfolio and watchlist, and flags
+A C++20 console app that tracks a stock portfolio and watchlist, and flags
 holdings that look cheap on a P/E + PEG basis.
 
 ## Features
