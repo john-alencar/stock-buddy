@@ -1,3 +1,14 @@
 #pragma once
-class WatchList {};
+
+namespace stockbuddy {
+	class WatchList {
+		
+	};
+	class Broker {
+		
+	};
+
+}
+
+
 

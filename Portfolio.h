@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "Asset.h"
-#include "watchlist.h"
+#include "WatchList.h"
 
 namespace stockbuddy {
 	class Portfolio {
