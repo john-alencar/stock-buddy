@@ -17,6 +17,8 @@ namespace stockbuddy {
 	public:
 		Asset(const char* ticker, const char* name);
 		virtual ~Asset() = default;
+		Asset(const Asset&) = default;
+		Asset& operator=(const Asset&) = default;
 		const std::string& ticker() const;
 		const std::string& name() const;
 		///Returns total value of the holding (shares * price)
