@@ -2,10 +2,8 @@
 
 namespace stockbuddy {
 	void Portfolio::setEmpty() {
-		if (m_assetArr != nullptr) {
-			for (int i=0; i<m_assetQty; ++i) {
-				delete m_assetArr[i];
-			}
+		for (int i=0; i<m_assetQty; ++i) {
+			delete m_assetArr[i];
 		}
 		delete[] m_assetArr;
 		m_assetArr = {};
@@ -30,10 +28,20 @@ namespace stockbuddy {
 		}
 	}
 
-	Portfolio::Portfolio(const Portfolio&) {
+	Portfolio::Portfolio(const Portfolio& other)
+		:m_assetQty{ other.m_assetQty }, m_assetArrSize{ other.m_assetArrSize }, m_assetArr{nullptr}, m_broker(other.m_broker) {
+		if (other.m_assetArr !=nullptr) {
+			if (m_assetArrSize > 0) {
+				m_assetArr = new Asset * [m_assetArrSize];
+			}
+			for (int i=0; i<m_assetArrSize; ++i) {
+				m_assetArr[i] = other.m_assetArr[i];
+			}
+		}
 	}
 
-	Portfolio& Portfolio::operator=(const Portfolio&) {
+	Portfolio& Portfolio::operator=(const Portfolio& other) {
+		if (this!=&other) {}
 	}
 
 	Portfolio::Portfolio(Portfolio&&) noexcept {
